@@ -132,3 +132,4 @@ dmypy.json
 notebook.ipynb
 
 logs
+catboost_info

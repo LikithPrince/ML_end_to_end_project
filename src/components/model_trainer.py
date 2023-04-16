@@ -14,6 +14,8 @@ from catboost import CatBoostRegressor
 from src.exception import CustomeException
 from src.logger import logging
 from src.utils import *
+from hyperparameter_config import params
+
 
 @dataclass
 class ModelTrainerConfig:
@@ -33,17 +35,17 @@ class ModelTrainer:
             test_array[:,-1]
          )
          models = {
-            "Linear Regression": LinearRegression(),
             "Decision Tree Regressor": DecisionTreeRegressor(),
-            "KNeighbors Regressor": KNeighborsRegressor(),
             "Random Forest Regressor": RandomForestRegressor(),
-            "AdaBoost Regressor": AdaBoostRegressor(),
-            "CatBoost Regressor": CatBoostRegressor(verbose = False),
+            "Gradient Boosting": GradientBoostingRegressor(),
+            "Linear Regression": LinearRegression(),
             "XGBoost Regressor": XGBRegressor(),
-            "Gradient Boosting": GradientBoostingRegressor()
+            "CatBoost Regressor": CatBoostRegressor(verbose = False),
+            "AdaBoost Regressor": AdaBoostRegressor(),
+            "KNeighbors Regressor": KNeighborsRegressor(),
          }
 
-         model_report : dict = evaluate_models(x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models = models)
+         model_report : dict = evaluate_models(x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models = models, params=params)
          best_model_score = max(sorted(model_report.values()))
          logging.info("Best model score: {}".format(best_model_score))
          best_model_name = list(model_report.keys())[
