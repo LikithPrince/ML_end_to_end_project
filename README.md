@@ -16,3 +16,8 @@
 ## setup.py
 --> setup.py file for packaging.
 
+## app.py
+for UI, run app.py from the below command,
+python3 app.py
+
+URL : http://127.0.0.1:8000/predictdata
